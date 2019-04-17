@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title>
+      Wallpaper
+    </title>
+
+    <style>
+    html, body {
+      width: 100vw;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+    }
+    body {
+      background-color: #000;
+      background-size: 100% 100%;
+    }
+    </style>
+
+    <script>
+    // Wallpaper Properties
+    var SpectrumColor = ''
+    var BarWidth = 5
+    var BGSize = "contain"
+    var BGPosX = 50;
+    var SpectrumBlurColor = "133, 71, 33";
+    var SpectrumBlurSize = 15;
+    var Intensity = 20;
+    var InitialHeight = 3;
+    var Spacing = 8;
+    var Amount = 128;
+    var SpectrumY = 4;
+    var Type = 1;
+    // /Wallpaper Properties
+
+      window.addEventListener('load', _ => {
+
+        // JSON Properties
+        window.wallpaperPropertyListener ={
+          applyUserProperties: function(properties){
+
+            // type
+            if(properties.SpectrumStyle) {
+              Type = properties.SpectrumStyle.value;
+            }
+            // /type
+
+            // Amount
+            if(properties.Amount) {
+              Amount = properties.Amount.value;
+            }
+            // /Amount
+
+            // Spacing
+            if(properties.Spacing) {
+              Spacing = properties.Spacing.value;
+            }
+            // /Spacing
+
+            // Initial Height
+            if(properties.Idle) {
+              InitialHeight = properties.Idle.value;
+            }
+            // /Initial Height
+
+            // Background
+            if(properties.bg){
+              if(properties.bg.value){
+                document.body.style.backgroundImage = "url('file:///" + properties.bg.value +"')";
+              }
+              else {
+                document.body.style.backgroundImage = "url('Backgrounds/default.jpg')";
+              }
+            }
+            // /Background
+
+            // Spectrum Color
+            if(properties.SpectrumColor) {
+              SpectrumColor = properties.SpectrumColor.value.split(' ').map(function(SpectrumColor){return Math.ceil(SpectrumColor*255)});
+            }
+            // /Spectrum Color
+
+            // Bar width
+            if(properties.BarWidth) {
+              BarWidth = properties.BarWidth.value;
+            }
+            // /Bar width
+
+            // Background Size
+            if(properties.BgSize) {
+              var size = properties.BgSize.value;
+              if(size == 1) {
+                BGSize = "100% 100%";
+              } else if (size == 2) {
+                BGSize = "cover";
+              }
+              document.body.style.backgroundSize = BGSize;
+            }
+            // /Background Size
+
+            // Spectrum Blur Color
+            if(properties.SpectrumBlurColor) {
+              SpectrumBlurColor = properties.SpectrumBlurColor.value.split(' ').map(function(SpectrumBlurColor){return Math.ceil(SpectrumBlurColor*255)});
+            }
+            // /Spectrum Blur Color
+
+            // Spectrum Blur Size
+            if(properties.SpectrumBlurSize) {
+              SpectrumBlurSize = properties.SpectrumBlurSize.value;
+            }
+            // /Spectrum Blur Size
+
+            // Intensity
+            if(properties.Intensity) {
+              Intensity = properties.Intensity.value;
+            }
+            // /Intensity
+
+            // Y Offset
+            if(properties.OffsetY) {
+              SpectrumY = properties.OffsetY.value;
+            }
+            // /Y Offset
+          }
+        }
+        // /JSON Properties
+
+        let audio = []
+
+        const canvas = document.createElement('canvas')
+        const context = canvas.getContext('2d')
+        canvas.width = window.innerWidth
+        canvas.height = window.innerHeight
+        document.body.appendChild(canvas)
+
+        const circle = document.createElement('canvas')
+        const ctx = circle.getContext('2d')
+        circle.width = window.innerWidth
+        circle.height = window.innerHeight
+        document.body.appendChild(circle)
+
+        const listener = arr => {
+          audio = arr
+        }
+
+        const draw = _ =>{
+          context.clearRect(0,0,window.innerWidth, window.innerHeight)
+          ctx.clearRect(0,0,window.innerWidth, window.innerHeight)
+
+          if(Type == 1) {
+            context.fillStyle = 'rgb('+SpectrumColor+')'
+            context.shadowBlur = SpectrumBlurSize;
+            context.shadowColor = 'rgb('+SpectrumBlurColor+')';
+
+            for(const [i, part] of audio.entries()) {
+              const x = (i * (window.innerWidth / Amount)) + ((i + 1) * Spacing) - (Spacing / 2)
+              const y = (SpectrumY * window.innerHeight) / 100
+              context.fillRect(x, y, BarWidth, (Intensity * 100) * part + InitialHeight)
+            }
+          }
+          requestAnimationFrame(draw)
+        }
+
+        window.wallpaperRegisterAudioListener(listener)
+        draw()
+      })
+    </script>
+  </head>
+  <body>
+
+
+  </body>
+</html>

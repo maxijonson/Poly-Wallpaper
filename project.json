@@ -1,0 +1,125 @@
+{
+  "type": "web",
+  "file": "index.html",
+  "description": "Audio Responsive Wallpaper by MaxiJonson",
+  "general":
+  {
+    "properties":
+    {
+
+      "bg":
+      {
+        "order": 1,
+        "text": "<br>Background<br>",
+        "type": "file"
+      },
+
+      "BgSize":
+      {
+        "text": "<br>Background Size<br>",
+        "type": "combo",
+        "value": 1,
+        "options" :
+        [
+          {
+            "label": "Fit",
+            "value": 1
+          },
+          {
+            "label": "Cover",
+            "value": 2
+          }
+        ],
+        "order": 2
+      },
+
+      "SpectrumColor":
+      {
+        "order": 3,
+        "text": "<br>Spectrum Color<br>",
+        "type" : "color",
+				"value" : "1 1 1"
+      },
+
+      "SpectrumBlurColor":
+      {
+        "order": 4,
+        "text": "<br>Spectrum Blur Color<br>",
+        "type" : "color",
+				"value" : "0.07 0.3 0.62"
+      },
+
+      "SpectrumBlurSize":
+      {
+        "order": 5,
+        "text": "<br>Spectrum Blur Size<br>",
+        "type": "slider",
+        "value": 10,
+        "min": 0,
+        "max": 100
+      },
+
+      "OffsetY":
+      {
+        "order": 6,
+        "text": "<br>Y Offset<br>",
+        "type": "slider",
+        "value": 1,
+        "min": 0,
+        "max": 100
+      },
+
+      "BarWidth":
+      {
+        "order": 7,
+        "text": "<br>Bar Width<br>",
+        "type": "slider",
+        "value": 2,
+        "min": 0,
+        "max": 35
+      },
+
+      "Intensity":
+      {
+        "order": 8,
+        "text": "<br>Intensity<br>",
+        "type": "slider",
+        "value": 3,
+        "min": 1,
+        "max": 10
+      },
+
+      "Idle":
+      {
+        "order": 9,
+        "text": "<br>Base Height<br>",
+        "type": "slider",
+        "value": 1,
+        "min": 0,
+        "max": 150
+      },
+
+      "Amount":
+      {
+        "order": 10,
+        "text": "<br>Amount of Bars<br>",
+        "type": "slider",
+        "value": 128,
+        "min": 1,
+        "max": 128
+      },
+
+      "Spacing":
+      {
+        "order": 11,
+        "text": "<br>Bar Spacing<br>",
+        "type": "slider",
+        "value": 8,
+        "min": 1,
+        "max": 100
+      }
+    },
+    "supportsaudioprocessing": true
+  }
+
+}
